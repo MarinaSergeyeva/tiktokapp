@@ -1,16 +1,18 @@
+import { Stack } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { PostItem } from '../PostItem';
 
 export const PostList = ({ data }) => {
   return (
-    <ul>
-      {Object.entries(data).map(([slug, { title }]) => (
-        <li key={slug}>
-          <Link to={`/posts/${slug}`}>
-            <h3>{title}</h3>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <Stack
+      direction="row"
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="space-evenly"
+    >
+      {data.map(item => {
+        return <PostItem key={item.id} item={item} />;
+      })}
+    </Stack>
   );
 };
