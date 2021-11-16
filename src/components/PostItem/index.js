@@ -40,7 +40,7 @@ export const PostItem = ({ item }) => {
       />
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt="video"
         height="350"
         image={covers.default}
       />
