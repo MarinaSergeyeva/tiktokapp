@@ -28,8 +28,9 @@ export const User = () => {
 
   return (
     <div style={{ padding: 20 }}>
-      {status === 'loading' && <Loader />}
-      {status === 'resolved' && (
+      {status === 'loading' ? (
+        <Loader />
+      ) : (
         <>
           <Stack sx={{ marginBottom: '20px' }}>
             {user && stats && posts && (
