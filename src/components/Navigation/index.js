@@ -1,36 +1,36 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import { useNavigate } from 'react-router';
 
 export const Navigation = () => {
+  const navigate = useNavigate();
+
+  const handlePageChange = location => {
+    navigate(location);
+  };
   return (
-    // <nav>
-    //   <Link to="/" style={{ padding: 5 }}>
-    //     Home
-    //   </Link>
-    //   <Link to="/user" style={{ padding: 5 }}>
-    //     User
-    //   </Link>
-    // </nav>
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, paddingX: '20px' }}
           >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ padding: 5 }}>
-              Home
-            </Link>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={() => handlePageChange('/')}
+            >
+              <MusicNoteIcon />
+              TikTuk
+            </IconButton>
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

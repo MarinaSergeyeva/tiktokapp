@@ -9,10 +9,11 @@ export const PostList = ({ data }) => {
       display="flex"
       flexWrap="wrap"
       justifyContent="space-evenly"
+      pt="70px"
     >
-      {data.map(item => {
-        return <PostItem key={item.id} item={item} />;
-      })}
+      {data.map(item => (
+        <PostItem key={item.id} item={item} />
+      ))}
     </Stack>
   );
 };
