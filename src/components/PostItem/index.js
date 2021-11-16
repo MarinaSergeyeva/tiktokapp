@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   Avatar,
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
@@ -22,13 +20,17 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const PostItem = ({ item }) => {
-  console.log(`item`, item);
   const navigate = useNavigate();
 
-  const { text, covers, authorMeta, hashtags } = item;
+  const navigateToUserPage = () => {
+    navigate(`/user/${item.authorMeta.id}`);
+  };
+
+  const { text, authorMeta, hashtags, videoUrl } = item;
   return (
     <Card sx={{ width: 345, marginBottom: '60px', marginX: '10px' }}>
       <CardHeader
+        sx={{ cursor: 'pointer' }}
         avatar={
           <Avatar
             sx={{ width: 56, height: 56 }}
@@ -37,20 +39,24 @@ export const PostItem = ({ item }) => {
           />
         }
         title={authorMeta.name}
+        onClick={navigateToUserPage}
       />
       <CardMedia
-        component="img"
+        sx={{ objectFit: 'cover' }}
+        component="video"
         alt="video"
-        height="350"
-        image={covers.default}
+        height="450"
+        src={videoUrl}
+        controls
+        contentEditable
+        muted
+        autoPlay
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {text}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
           {hashtags.length > 0 && (
-            <Box sx={{ flexGrow: 1 }}>
+            <Box>
               <Grid container spacing={3}>
                 {hashtags.map(tag => {
                   <Grid item xs="auto">
@@ -62,17 +68,6 @@ export const PostItem = ({ item }) => {
           )}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button
-          size="small"
-          onClick={() => {
-            navigate(`/posts/${item.id}`);
-          }}
-        >
-          Learn More
-        </Button>
-      </CardActions>
     </Card>
   );
 };

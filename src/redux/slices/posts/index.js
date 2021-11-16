@@ -20,13 +20,13 @@ export const postsSlice = createSlice({
       state.status = 'loading';
       state.error = null;
     },
-    [fetchPostsThunk.fulfilled]: (state, action) => {
+    [fetchPostsThunk.fulfilled]: (state, { payload }) => {
       state.status = 'resolved';
-      state.posts = action.payload;
+      state.posts = payload;
     },
-    [fetchPostsThunk.rejected]: (state, action) => {
+    [fetchPostsThunk.rejected]: (state, { payload }) => {
       state.status = 'rejected';
-      state.error = action.payload;
+      state.error = payload;
     },
   },
 });
