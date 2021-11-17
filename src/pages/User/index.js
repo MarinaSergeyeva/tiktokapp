@@ -20,11 +20,12 @@ export const User = () => {
   const { user, stats } = useSelector(state => state.user.info);
   const post = timeLinePosts.find(post => post.authorMeta.id === slug);
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const [page, setPage] = useState(1);
-  const [numOfPages] = useState(itemList.length / itemsPerPage);
+  const [numOfPages] = useState(Math.round(itemList.length / itemsPerPage));
   const handleChange = (e, value) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {

@@ -16,7 +16,7 @@ const Loader = () => {
     >
       <Typography
         sx={{ display: 'block', mb: '20px' }}
-        component="text"
+        component="p"
         variant="h6"
         color={palette.primary.main}
       >

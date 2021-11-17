@@ -4,12 +4,13 @@ import { Box } from '@mui/system';
 import { PostItem } from '../PostItem';
 
 export const PostList = ({ data }) => {
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const [page, setPage] = useState(1);
-  const [numOfPages] = useState(data.length / itemsPerPage);
+  const [numOfPages] = useState(Math.round(data.length / itemsPerPage));
 
   const handleChange = (e, value) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
 
   return (
