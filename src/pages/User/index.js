@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { Avatar, Stack, Typography } from '@mui/material';
+import { Avatar, Divider, Pagination, Stack, Typography } from '@mui/material';
 import Loader from '../../components/Loader';
 import {
   fetchUserInfoThunk,
   fetchUserPostsThunk,
 } from '../../redux/slices/user/thunk';
 import UserPostCard from '../../components/UserPostCard';
+import { Box } from '@mui/system';
 
 export const User = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,13 @@ export const User = () => {
 
   const { user, stats } = useSelector(state => state.user.info);
   const post = timeLinePosts.find(post => post.authorMeta.id === slug);
+
+  const itemsPerPage = 6;
+  const [page, setPage] = useState(1);
+  const [numOfPages] = useState(itemList.length / itemsPerPage);
+  const handleChange = (e, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     if (slug !== info?.user?.id) {
@@ -46,14 +54,18 @@ export const User = () => {
                   src={user.avatarMedium || ''}
                   sx={{ width: 56, height: 56 }}
                 />
-                <Typography>{user.nickname || ''}</Typography>
-                <Typography>{user.signature || ''}</Typography>
+                <Typography variant="h6">{user.nickname || ''}</Typography>
+                <Typography variant="subtitle2">
+                  {user.signature || ''}
+                </Typography>
                 <Stack direction="row" spacing={2}>
-                  <Typography>Follower: {stats.followerCount || ''}</Typography>
-                  <Typography>
+                  <Typography variant="subtitle1">
+                    Follower: {stats.followerCount || ''}
+                  </Typography>
+                  <Typography variant="subtitle1">
                     Following: {stats.followingCount || ''}
                   </Typography>
-                  <Typography>
+                  <Typography variant="subtitle1">
                     Video posted: {stats.videoCount || ''}
                   </Typography>
                 </Stack>
@@ -61,16 +73,38 @@ export const User = () => {
             )}
           </Stack>
           {itemList && (
-            <Stack
-              direction="row"
-              display="flex"
-              flexWrap="wrap"
-              justifyContent="space-evenly"
-            >
-              {itemList.map(post => (
-                <UserPostCard key={post.id} post={post} />
-              ))}
-            </Stack>
+            <>
+              <Stack
+                direction="row"
+                display="flex"
+                flexWrap="wrap"
+                justifyContent="space-evenly"
+              >
+                {itemList
+                  .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+                  .map(post => (
+                    <UserPostCard key={post.id} post={post} />
+                  ))}
+              </Stack>
+              {itemList.length > 6 && (
+                <Stack>
+                  <Divider sx={{ mb: '10px' }} />
+                  <Box component="span">
+                    <Pagination
+                      count={numOfPages}
+                      page={page}
+                      onChange={handleChange}
+                      defaultPage={1}
+                      color="primary"
+                      size="large"
+                      showFirstButton
+                      showLastButton
+                      sx={{ display: 'flex', justifyContent: 'center' }}
+                    />
+                  </Box>
+                </Stack>
+              )}
+            </>
           )}
         </Stack>
       )}
