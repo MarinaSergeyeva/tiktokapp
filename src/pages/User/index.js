@@ -31,7 +31,13 @@ export const User = () => {
       {status === 'loading' ? (
         <Loader />
       ) : (
-        <>
+        <Stack
+          direction="row"
+          display="flex"
+          flexWrap="wrap"
+          justifyContent="space-evenly"
+          pt="70px"
+        >
           <Stack sx={{ marginBottom: '20px' }}>
             {user && stats && posts && (
               <>
@@ -59,7 +65,7 @@ export const User = () => {
               direction="row"
               display="flex"
               flexWrap="wrap"
-              justifyContent="space-between"
+              justifyContent="space-evenly"
             >
               {console.log(`itemList`, itemList)}
               {itemList.map(post => (
@@ -67,7 +73,7 @@ export const User = () => {
               ))}
             </Stack>
           )}
-        </>
+        </Stack>
       )}
     </div>
   );
