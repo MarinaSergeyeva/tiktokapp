@@ -67,7 +67,6 @@ export const User = () => {
               flexWrap="wrap"
               justifyContent="space-evenly"
             >
-              {console.log(`itemList`, itemList)}
               {itemList.map(post => (
                 <UserPostCard key={post.id} post={post} />
               ))}

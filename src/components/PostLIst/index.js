@@ -1,19 +1,16 @@
-import { Stack } from '@mui/material';
 import React from 'react';
+import { Stack } from '@mui/material';
 import { PostItem } from '../PostItem';
+import CustomPagination from '../Pagination';
 
-export const PostList = ({ data }) => {
-  return (
-    <Stack
-      direction="row"
-      display="flex"
-      flexWrap="wrap"
-      justifyContent="space-evenly"
-      pt="70px"
-    >
-      {data.map(item => (
-        <PostItem key={item.id} item={item} />
-      ))}
-    </Stack>
-  );
-};
+export const PostList = ({ data }) => (
+  <Stack
+    direction="row"
+    display="flex"
+    flexWrap="wrap"
+    justifyContent="space-evenly"
+    pt="70px"
+  >
+    <CustomPagination data={data} itemComponent={<PostItem />} />
+  </Stack>
+);
