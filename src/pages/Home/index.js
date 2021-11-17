@@ -1,9 +1,8 @@
-// import React from 'react';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router';
 import Loader from '../../components/Loader';
-import { PostList } from '../../components/PostList';
+import { PostList } from '../../components/PostLIst';
 import { fetchPostsThunk } from '../../redux/slices/posts/thunk';
 
 export const Home = () => {
